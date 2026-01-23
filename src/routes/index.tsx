@@ -52,7 +52,7 @@ function App() {
         opacity: 1,
         stagger: 0.1,
         ease: "power3.out",
-        clearProps: "transform,opacity", // 애니메이션 완료 후 인라인 스타일 제거
+        clearProps: "transform,opacity",
       });
 
       gsap.to(".projects-header", {
@@ -101,7 +101,7 @@ function App() {
               role="button"
               tabIndex={0}
               style={{ viewTransitionName: `project-card-${project.id}` }}
-              className={`bento-card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-black/20 overflow-hidden cursor-pointer ${getSizeClasses(project.size)}`}
+              className={`bento-card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:translate-y-[-5px] hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/20 overflow-hidden cursor-pointer ${getSizeClasses(project.size)}`}
             >
               {/* Gradient overlay */}
               <div
@@ -118,14 +118,21 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex flex-col group-hover:translate-x-[5px] transition-all duration-500">
                   <h3
                     style={{
                       viewTransitionName: `project-title-${project.id}`,
                     }}
-                    className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-linear-to-r group-hover:from-purple-300 group-hover:to-cyan-300 group-hover:bg-clip-text transition-all duration-300"
+                    className="relative text-xl md:text-2xl font-bold mb-3"
                   >
-                    {project.title}
+                    {/* 기본 흰색 텍스트 - hover시 fade out */}
+                    <span className="text-white transition-opacity duration-300 group-hover:opacity-0">
+                      {project.title}
+                    </span>
+                    {/* 그라데이션 텍스트 - hover시 fade in */}
+                    <span className="absolute inset-0 bg-linear-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      {project.title}
+                    </span>
                   </h3>
 
                   <p className="text-white/70 text-sm md:text-base mb-4 leading-relaxed flex-1">
