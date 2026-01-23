@@ -12,3 +12,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+/* View Transitions API Styles */
+@supports (view-transition-name: none) {
+  /* Apply to all view transitions */
+  ::view-transition-group(*) {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Root transition (background) - slightly faster */
+  ::view-transition-group(root) {
+    animation-duration: 0.4s;
+  }
+}
