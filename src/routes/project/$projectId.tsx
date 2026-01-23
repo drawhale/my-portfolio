@@ -78,14 +78,28 @@ function ProjectDetail() {
 
           {/* Main Content */}
           <main className="flex-1 px-6 pb-12 max-w-4xl mx-auto w-full">
-            {/* Icon & Title */}
-            <div className="mb-8">
+            {/* Image or Gradient Header */}
+            {project.image ? (
               <div
-                style={{ viewTransitionName: `project-icon-${project.id}` }}
-                className={`inline-flex p-4 bg-linear-to-br ${project.color} rounded-2xl mb-6 text-white shadow-lg`}
+                style={{ viewTransitionName: `project-image-${project.id}` }}
+                className="relative h-64 md:h-80 -mx-6 mb-8 overflow-hidden rounded-2xl"
               >
-                {project.icon}
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 via-50% to-transparent" />
               </div>
+            ) : (
+              <div
+                style={{ viewTransitionName: `project-dot-${project.id}` }}
+                className={`w-4 h-4 bg-linear-to-br ${project.color} rounded-full mb-6 shadow-lg`}
+              />
+            )}
+
+            {/* Title & Description */}
+            <div className="mb-8">
               <h1
                 style={{ viewTransitionName: `project-title-${project.id}` }}
                 className="text-4xl md:text-6xl font-black text-white mb-4"

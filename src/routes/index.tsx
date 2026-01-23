@@ -109,13 +109,27 @@ function App() {
               />
 
               <div className="relative h-full flex flex-col">
-                {/* Icon */}
-                <div
-                  style={{ viewTransitionName: `project-icon-${project.id}` }}
-                  className={`inline-flex p-3 bg-linear-to-br ${project.color} rounded-2xl mb-4 text-white shadow-lg shadow-black/10 self-start backdrop-blur-sm border border-white/20`}
-                >
-                  {project.icon}
-                </div>
+                {/* Image or Gradient Dot */}
+                {project.image ? (
+                  <div
+                    style={{
+                      viewTransitionName: `project-image-${project.id}`,
+                    }}
+                    className="relative h-[60%] -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-3xl"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 via-50% to-transparent" />
+                  </div>
+                ) : (
+                  <div
+                    style={{ viewTransitionName: `project-dot-${project.id}` }}
+                    className={`w-3 h-3 bg-linear-to-br ${project.color} rounded-full mb-4 shadow-lg shadow-black/20`}
+                  />
+                )}
 
                 {/* Content */}
                 <div className="flex-1 flex flex-col group-hover:translate-x-[5px] transition-all duration-500">
@@ -135,9 +149,11 @@ function App() {
                     </span>
                   </h3>
 
-                  <p className="text-white/70 text-sm md:text-base mb-4 leading-relaxed flex-1">
-                    {project.description}
-                  </p>
+                  {!project.image && (
+                    <p className="text-white/70 text-sm md:text-base mb-4 leading-relaxed flex-1">
+                      {project.description}
+                    </p>
+                  )}
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">

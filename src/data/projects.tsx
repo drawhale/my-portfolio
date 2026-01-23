@@ -1,14 +1,3 @@
-import {
-  Code2,
-  Database,
-  Globe,
-  Palette,
-  Rocket,
-  Smartphone,
-  Sparkles,
-  Zap,
-} from "lucide-react";
-
 export interface Project {
   id: string;
   title: string;
@@ -16,7 +5,7 @@ export interface Project {
   fullDescription?: string;
   tags: string[];
   color: string;
-  icon: React.ReactNode;
+  image?: string;
   size: "large" | "medium" | "wide" | "tall";
   demoUrl?: string;
   codeUrl?: string;
@@ -32,7 +21,7 @@ export const projects: Project[] = [
       "A comprehensive e-commerce platform built from the ground up. Features include real-time inventory management, advanced search with filters, secure Stripe payment integration, order tracking, and an admin dashboard for managing products and orders.",
     tags: ["React", "Node.js", "MongoDB", "Stripe"],
     color: "from-purple-500 to-pink-500",
-    icon: <Rocket className="w-8 h-8" />,
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
     size: "large",
   },
   {
@@ -44,7 +33,6 @@ export const projects: Project[] = [
       "A fully documented design system featuring 50+ accessible, customizable components. Includes dark mode support, responsive variants, and comprehensive Storybook documentation with interactive examples.",
     tags: ["React", "TailwindCSS", "Storybook"],
     color: "from-cyan-500 to-blue-500",
-    icon: <Palette className="w-8 h-8" />,
     size: "medium",
   },
   {
@@ -56,7 +44,6 @@ export const projects: Project[] = [
       "An AI-powered chatbot with conversation memory, context awareness, and streaming responses. Features include conversation history, custom persona settings, and integration with various data sources for enhanced responses.",
     tags: ["Next.js", "OpenAI", "TypeScript"],
     color: "from-green-500 to-emerald-500",
-    icon: <Sparkles className="w-8 h-8" />,
     size: "medium",
   },
   {
@@ -68,7 +55,6 @@ export const projects: Project[] = [
       "A real-time analytics dashboard featuring interactive D3.js visualizations, customizable widgets, data export capabilities, and automated report generation. Handles millions of data points with optimized performance.",
     tags: ["React", "D3.js", "PostgreSQL"],
     color: "from-orange-500 to-red-500",
-    icon: <Database className="w-8 h-8" />,
     size: "wide",
   },
   {
@@ -80,7 +66,6 @@ export const projects: Project[] = [
       "A robust API gateway handling 10,000+ requests per second. Features include intelligent rate limiting, Redis caching, request/response transformation, authentication middleware, and comprehensive logging with metrics.",
     tags: ["Node.js", "Redis", "Docker"],
     color: "from-indigo-500 to-purple-500",
-    icon: <Zap className="w-8 h-8" />,
     size: "medium",
   },
   {
@@ -92,7 +77,6 @@ export const projects: Project[] = [
       "This very website you're viewing! Built with TanStack Start for server-side rendering, GSAP for smooth animations, and Tailwind CSS for styling. Features include view transitions and a responsive bento grid layout.",
     tags: ["TanStack Start", "GSAP", "Tailwind"],
     color: "from-pink-500 to-rose-500",
-    icon: <Globe className="w-8 h-8" />,
     size: "medium",
   },
   {
@@ -103,7 +87,6 @@ export const projects: Project[] = [
       "A cross-platform mobile app with native-like performance. Features include offline support, push notifications, biometric authentication, and seamless synchronization across devices.",
     tags: ["React Native", "Expo", "Firebase"],
     color: "from-blue-500 to-cyan-500",
-    icon: <Smartphone className="w-8 h-8" />,
     size: "tall",
   },
   {
@@ -115,7 +98,6 @@ export const projects: Project[] = [
       "A powerful web-based code editor built on Monaco Editor. Features include multi-language support, intelligent autocomplete, real-time collaboration, and WebAssembly-powered Rust tooling for enhanced performance.",
     tags: ["Monaco", "WebAssembly", "Rust"],
     color: "from-yellow-500 to-orange-500",
-    icon: <Code2 className="w-8 h-8" />,
     size: "medium",
   },
 ];
