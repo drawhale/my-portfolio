@@ -52,6 +52,7 @@ function App() {
         opacity: 1,
         stagger: 0.1,
         ease: "power3.out",
+        clearProps: "transform,opacity", // 애니메이션 완료 후 인라인 스타일 제거
       });
 
       gsap.to(".projects-header", {
@@ -59,6 +60,7 @@ function App() {
         y: 0,
         opacity: 1,
         ease: "power3.out",
+        clearProps: "transform,opacity",
       });
     }, 100);
 
@@ -99,7 +101,7 @@ function App() {
               role="button"
               tabIndex={0}
               style={{ viewTransitionName: `project-card-${project.id}` }}
-              className={`bento-card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/20 overflow-hidden cursor-pointer ${getSizeClasses(project.size)}`}
+              className={`bento-card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-black/20 overflow-hidden cursor-pointer ${getSizeClasses(project.size)}`}
             >
               {/* Gradient overlay */}
               <div
