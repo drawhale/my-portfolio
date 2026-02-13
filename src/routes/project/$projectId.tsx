@@ -27,7 +27,9 @@ function ProjectDetail() {
     return (
       <div className="min-h-screen bg-slate-950 px-6 py-20">
         <div className="glass-panel mx-auto max-w-xl rounded-3xl p-8 text-center">
-          <h1 className="mb-3 text-4xl font-bold text-white">Project Not Found</h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">
+            Project Not Found
+          </h1>
           <Link
             to="/"
             className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/18"
@@ -68,7 +70,7 @@ function ProjectDetail() {
           </button>
         </header>
 
-        <main className="glass-panel rounded-[2rem] p-5 md:p-8">
+        <main className="glass-panel rounded-4xl p-5 md:p-8">
           <div className="glass-chip mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/92 uppercase">
             <Sparkles className="h-3.5 w-3.5" />
             Project Story
@@ -77,7 +79,7 @@ function ProjectDetail() {
           {project.image ? (
             <div
               style={{ viewTransitionName: `project-image-${project.id}` }}
-              className="relative mb-7 h-64 overflow-hidden rounded-3xl md:h-[23rem]"
+              className="relative mb-7 h-64 overflow-hidden rounded-3xl md:h-92"
             >
               <img
                 src={project.image}
@@ -85,14 +87,14 @@ function ProjectDetail() {
                 className="h-full w-full object-cover"
               />
               <div
-                className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-[0.22] mix-blend-screen`}
+                className={`absolute inset-0 bg-linear-to-tr ${project.color} opacity-[0.22] mix-blend-screen`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/42 via-48% to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/42 via-48% to-transparent" />
             </div>
           ) : (
             <div
               style={{ viewTransitionName: `project-dot-${project.id}` }}
-              className={`mb-5 h-4 w-4 rounded-full bg-gradient-to-br ${project.color} shadow-[0_0_22px_rgba(255,255,255,0.34)]`}
+              className={`mb-5 h-4 w-4 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_22px_rgba(255,255,255,0.34)]`}
             />
           )}
 
@@ -136,7 +138,7 @@ function ProjectDetail() {
                 href={project.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 rounded-xl bg-gradient-to-r ${project.color} px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(0,0,0,0.28)] transition-transform duration-300 hover:translate-y-[-2px]`}
+                className={`inline-flex items-center gap-2 rounded-xl bg-linear-to-r ${project.color} px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(0,0,0,0.28)] transition-transform duration-300 hover:translate-y-[-2px]`}
               >
                 <Code2 className="h-[18px] w-[18px]" />
                 View Code

@@ -1,66 +1,65 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { getSizeClasses, projects } from "../data/projects";
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowRight, Sparkles } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { getSizeClasses, projects } from '../data/projects'
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: App,
-});
+})
 
 function App() {
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const projectsRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   const isNavigatingBackRef = useRef(
-    typeof window !== "undefined" &&
-      sessionStorage.getItem("isNavigatingBack") === "true",
-  );
+    typeof window !== 'undefined' && sessionStorage.getItem('isNavigatingBack') === 'true',
+  )
 
   const handleCardClick = (projectId: string) => {
     if (document.startViewTransition) {
       document.startViewTransition(async () => {
-        await navigate({ to: "/project/$projectId", params: { projectId } });
-      });
+        await navigate({ to: '/project/$projectId', params: { projectId } })
+      })
     } else {
-      navigate({ to: "/project/$projectId", params: { projectId } });
+      navigate({ to: '/project/$projectId', params: { projectId } })
     }
-  };
+  }
 
   useEffect(() => {
     if (isNavigatingBackRef.current) {
-      sessionStorage.removeItem("isNavigatingBack");
-      return;
+      sessionStorage.removeItem('isNavigatingBack')
+      return
     }
 
-    gsap.set(".bento-card", { y: 56, opacity: 0, scale: 0.98 });
-    gsap.set(".projects-header", { y: -28, opacity: 0 });
+    gsap.set('.bento-card', { y: 56, opacity: 0, scale: 0.98 })
+    gsap.set('.projects-header', { y: -28, opacity: 0 })
 
     const timer = setTimeout(() => {
-      gsap.to(".bento-card", {
+      gsap.to('.bento-card', {
         duration: 0.82,
         y: 0,
         opacity: 1,
         scale: 1,
         stagger: 0.08,
-        ease: "power3.out",
-        clearProps: "transform,opacity",
-      });
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+      })
 
-      gsap.to(".projects-header", {
+      gsap.to('.projects-header', {
         duration: 0.92,
         y: 0,
         opacity: 1,
-        ease: "power3.out",
-        clearProps: "transform,opacity",
-      });
-    }, 100);
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+      })
+    }, 100)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -72,8 +71,8 @@ function App() {
         ref={projectsRef}
         className="projects-section relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 pb-14 pt-12 md:px-8"
       >
-        <div className="projects-header glass-panel mb-8 rounded-[2rem] px-6 py-8 md:px-10 md:py-10">
-          <div className="glass-chip mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase">
+        <header className="projects-header relative mb-10 border-b border-white/15 pb-8 md:pb-10">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" />
             Selected Work
           </div>
@@ -81,34 +80,28 @@ function App() {
           <h1 className="text-balance text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
             Bento Portfolio,
             <br />
-            <span className="bg-gradient-to-r from-cyan-200 via-white to-fuchsia-200 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-200 via-white to-fuchsia-200 bg-clip-text text-transparent">
               Glass Reimagined
             </span>
           </h1>
 
           <p className="mt-5 max-w-3xl text-sm leading-relaxed text-white/72 md:text-lg">
-            A curated selection of builds focused on delightful interaction,
-            resilient architecture, and pixel-precise product execution.
+            A curated selection of builds focused on delightful interaction, resilient architecture,
+            and pixel-precise product execution.
           </p>
-        </div>
+        </header>
 
         <div className="grid grid-cols-1 auto-rows-[280px] gap-4 md:grid-cols-4 md:auto-rows-[320px]">
           {projects.map((project) => (
-            <article
+            <button
+              type="button"
               key={project.id}
               onClick={() => handleCardClick(project.id)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleCardClick(project.id);
-                }
-              }}
-              role="button"
-              tabIndex={0}
               style={{ viewTransitionName: `project-card-${project.id}` }}
-              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 ${getSizeClasses(project.size)}`}
+              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 ${getSizeClasses(project.size)}`}
             >
               <div
-                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${project.color} opacity-[0.18] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
+                className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.18] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
               />
 
               {project.image ? (
@@ -121,12 +114,12 @@ function App() {
                     alt={project.title}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/48 via-45% to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/48 via-45% to-transparent" />
                 </div>
               ) : (
                 <div
                   style={{ viewTransitionName: `project-dot-${project.id}` }}
-                  className={`mb-4 h-3.5 w-3.5 rounded-full bg-gradient-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
+                  className={`mb-4 h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
                 />
               )}
 
@@ -138,7 +131,7 @@ function App() {
                   <span className="transition-opacity duration-300 group-hover:opacity-0">
                     {project.title}
                   </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="absolute inset-0 bg-linear-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     {project.title}
                   </span>
                 </h3>
@@ -167,7 +160,7 @@ function App() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </section>
@@ -179,5 +172,5 @@ function App() {
         </div>
       </footer>
     </div>
-  );
+  )
 }

@@ -9,8 +9,7 @@ body {
   background:
     radial-gradient(circle at 10% 10%, #8ec5ff33 0, transparent 45%),
     radial-gradient(circle at 85% 12%, #c9a6ff2e 0, transparent 50%),
-    radial-gradient(circle at 35% 80%, #6ee7d842 0, transparent 44%),
-    #020617;
+    radial-gradient(circle at 35% 80%, #6ee7d842 0, transparent 44%), #020617;
 }
 
 code {

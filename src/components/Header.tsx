@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router'
 import {
   ChevronDown,
   ChevronRight,
@@ -9,14 +9,12 @@ import {
   SquareFunction,
   StickyNote,
   X,
-} from "lucide-react";
-import { type ReactNode, useState } from "react";
+} from 'lucide-react'
+import { type ReactNode, useState } from 'react'
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [groupedExpanded, setGroupedExpanded] = useState<
-    Record<string, boolean>
-  >({});
+  const [isOpen, setIsOpen] = useState(false)
+  const [groupedExpanded, setGroupedExpanded] = useState<Record<string, boolean>>({})
 
   return (
     <>
@@ -47,7 +45,7 @@ export default function Header() {
 
       <aside
         className={`fixed left-0 top-0 z-50 flex h-full w-84 flex-col border-r border-white/20 bg-slate-950/72 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex items-center justify-between border-b border-white/15 p-4">
@@ -66,12 +64,7 @@ export default function Header() {
         </div>
 
         <nav className="flex-1 overflow-y-auto p-4">
-          <NavLink
-            to="/"
-            icon={<Home size={18} />}
-            label="Home"
-            onClick={() => setIsOpen(false)}
-          />
+          <NavLink to="/" icon={<Home size={18} />} label="Home" onClick={() => setIsOpen(false)} />
 
           <div className="my-3 h-px bg-white/10" />
 
@@ -96,7 +89,7 @@ export default function Header() {
               className="glass-chip flex-1 rounded-xl px-3 py-2.5 text-sm font-medium text-white/92 transition-colors hover:bg-white/20"
               activeProps={{
                 className:
-                  "glass-chip flex-1 rounded-xl border border-cyan-200/60 bg-cyan-200/20 px-3 py-2.5 text-sm font-semibold text-white",
+                  'glass-chip flex-1 rounded-xl border border-cyan-200/60 bg-cyan-200/20 px-3 py-2.5 text-sm font-semibold text-white',
               }}
             >
               <span className="inline-flex items-center gap-2">
@@ -147,7 +140,7 @@ export default function Header() {
         </nav>
       </aside>
     </>
-  );
+  )
 }
 
 function NavLink({
@@ -156,10 +149,10 @@ function NavLink({
   label,
   onClick,
 }: {
-  to: string;
-  icon: ReactNode;
-  label: string;
-  onClick: () => void;
+  to: string
+  icon: ReactNode
+  label: string
+  onClick: () => void
 }) {
   return (
     <Link
@@ -168,11 +161,11 @@ function NavLink({
       className="mb-2 flex items-center gap-2 rounded-xl border border-white/15 bg-white/6 px-3 py-2.5 text-sm font-medium text-white/90 transition-all hover:bg-white/16"
       activeProps={{
         className:
-          "mb-2 flex items-center gap-2 rounded-xl border border-cyan-200/65 bg-cyan-200/20 px-3 py-2.5 text-sm font-semibold text-white",
+          'mb-2 flex items-center gap-2 rounded-xl border border-cyan-200/65 bg-cyan-200/20 px-3 py-2.5 text-sm font-semibold text-white',
       }}
     >
       {icon}
       <span>{label}</span>
     </Link>
-  );
+  )
 }
