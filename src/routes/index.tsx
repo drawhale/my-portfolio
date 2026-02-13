@@ -56,7 +56,7 @@ function App() {
       opacity: 0,
       filter: "blur(8px)",
     });
-    gsap.set(".hero-d, .hero-w", {
+    gsap.set(".hero-d, .hero-w, .hero-expand-d, .hero-expand-w", {
       textShadow: "0 0 0 rgba(0,0,0,0)",
       scale: 1,
     });
@@ -80,12 +80,23 @@ function App() {
           ".hero-d, .hero-w",
           {
             duration: 0.42,
-            scale: 1.08,
+            scale: 1.12,
             textShadow:
-              "0 0 12px rgba(125,211,252,0.65), 0 0 28px rgba(232,121,249,0.32)",
+              "0 0 10px rgba(125,211,252,0.9), 0 0 24px rgba(56,189,248,0.55), 0 0 42px rgba(217,70,239,0.34), 0 0 62px rgba(244,114,182,0.2)",
             ease: "power2.out",
           },
           0.48,
+        )
+        .to(
+          ".hero-d, .hero-w",
+          {
+            duration: 0.3,
+            scale: 1.05,
+            textShadow:
+              "0 0 7px rgba(186,230,253,0.55), 0 0 18px rgba(167,139,250,0.28), 0 0 28px rgba(244,114,182,0.15)",
+            ease: "power2.out",
+          },
+          0.84,
         )
         .to(
           ".hero-ong, .hero-ook",
@@ -140,6 +151,8 @@ function App() {
           {
             duration: 0.5,
             x: 0,
+            textShadow:
+              "0 0 7px rgba(186,230,253,0.3), 0 0 16px rgba(167,139,250,0.16)",
             ease: "power3.out",
           },
           1.12,
@@ -149,9 +162,21 @@ function App() {
           {
             duration: 0.5,
             x: 0,
+            textShadow:
+              "0 0 7px rgba(244,114,182,0.24), 0 0 16px rgba(232,121,249,0.16)",
             ease: "power3.out",
           },
           1.12,
+        )
+        .to(
+          ".hero-expand-d, .hero-expand-w",
+          {
+            duration: 0.36,
+            textShadow:
+              "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
+            ease: "power2.out",
+          },
+          1.45,
         )
         .to(
           ".hero-expand-e",
@@ -223,7 +248,7 @@ function App() {
       >
         <div className="mb-7 md:mb-9">
           <div className="relative h-[5.2rem] md:h-[7.4rem]">
-            <div className="hero-name absolute inset-0 flex items-end text-[2.25rem] leading-none font-extrabold tracking-tight text-white md:text-[4.1rem]">
+            <div className="hero-name absolute inset-0 flex items-end text-[2.25rem] leading-none font-extrabold tracking-tight text-white opacity-0 md:text-[4.1rem]">
               <span className="hero-d bg-linear-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent">
                 D
               </span>
@@ -234,12 +259,15 @@ function App() {
               <span className="hero-ook">ook</span>
             </div>
 
-            <div className="hero-expand absolute inset-0 flex items-end gap-0 text-[2rem] leading-none font-extrabold tracking-tight md:text-[4rem]">
+            <div className="hero-expand absolute inset-0 flex items-end gap-0 text-[2rem] leading-none font-extrabold tracking-tight opacity-0 md:text-[4rem]">
               <span className="inline-flex items-end gap-0">
                 <span className="hero-expand-d bg-linear-to-r from-cyan-100 to-teal-200 bg-clip-text text-transparent">
                   D
                 </span>
-                <span className="hero-expand-e inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-cyan-100 via-white to-blue-200 bg-clip-text text-transparent">
+                <span
+                  className="hero-expand-e inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-cyan-100 via-white to-blue-200 bg-clip-text text-transparent"
+                  style={{ width: 0, opacity: 0 }}
+                >
                   evelop
                 </span>
               </span>
@@ -248,14 +276,17 @@ function App() {
                 <span className="hero-expand-w bg-linear-to-r from-rose-100 to-fuchsia-200 bg-clip-text text-transparent">
                   W
                 </span>
-                <span className="hero-expand-eb inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-rose-100 via-white to-fuchsia-200 bg-clip-text text-transparent">
+                <span
+                  className="hero-expand-eb inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-rose-100 via-white to-fuchsia-200 bg-clip-text text-transparent"
+                  style={{ width: 0, opacity: 0 }}
+                >
                   eb
                 </span>
               </span>
             </div>
           </div>
 
-          <p className="hero-sub mt-3 text-sm text-white/66 md:text-base">
+          <p className="hero-sub mt-3 text-sm text-white/66 opacity-0 md:text-base">
             Dongwook identity sharpens into{" "}
             <span className="text-white/88">Develop Web</span>
           </p>
