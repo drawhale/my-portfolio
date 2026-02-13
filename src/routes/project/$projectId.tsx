@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Code2, ExternalLink, X } from "lucide-react";
+import { ArrowLeft, Code2, ExternalLink, Sparkles, X } from "lucide-react";
 import { getProjectById } from "../../data/projects";
 
 export const Route = createFileRoute("/project/$projectId")({
@@ -12,11 +12,9 @@ function ProjectDetail() {
   const project = getProjectById(projectId);
 
   const handleClose = () => {
-    // Use View Transitions API if available
     if (document.startViewTransition) {
       document.startViewTransition(async () => {
         sessionStorage.setItem("isNavigatingBack", "true");
-        // navigate() returns a promise, so View Transition waits for render
         await navigate({ to: "/" });
       });
     } else {
@@ -27,14 +25,12 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            Project Not Found
-          </h1>
+      <div className="min-h-screen bg-slate-950 px-6 py-20">
+        <div className="glass-panel mx-auto max-w-xl rounded-3xl p-8 text-center">
+          <h1 className="mb-3 text-4xl font-bold text-white">Project Not Found</h1>
           <Link
             to="/"
-            className="text-purple-400 hover:text-purple-300 transition-colors"
+            className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/18"
           >
             Back to Home
           </Link>
@@ -44,117 +40,115 @@ function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950">
+      <div className="pointer-events-none absolute -right-24 top-12 h-96 w-96 rounded-full bg-fuchsia-400/18 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-cyan-400/16 blur-3xl" />
+
       <div
         style={{ viewTransitionName: `project-card-${project.id}` }}
-        className={`min-h-screen bg-linear-to-br ${project.color} bg-opacity-10`}
+        className="relative z-10 mx-auto min-h-screen w-full max-w-5xl px-5 pb-12 pt-8 md:px-8"
       >
-        {/* Gradient Background */}
-        <div
-          className={`absolute inset-0 bg-linear-to-br ${project.color} opacity-10`}
-        />
+        <header className="glass-panel mb-6 flex items-center justify-between rounded-3xl p-4 md:p-5">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="glass-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
+          >
+            <ArrowLeft className="h-[18px] w-[18px]" />
+            Back
+          </button>
 
-        {/* Content */}
-        <div className="relative z-10 min-h-screen flex flex-col">
-          {/* Header */}
-          <header className="p-6 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={handleClose}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20"
+          <button
+            type="button"
+            onClick={handleClose}
+            className="glass-chip rounded-full p-2.5 text-white transition-all duration-300 hover:bg-white/20"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </header>
+
+        <main className="glass-panel rounded-[2rem] p-5 md:p-8">
+          <div className="glass-chip mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/92 uppercase">
+            <Sparkles className="h-3.5 w-3.5" />
+            Project Story
+          </div>
+
+          {project.image ? (
+            <div
+              style={{ viewTransitionName: `project-image-${project.id}` }}
+              className="relative mb-7 h-64 overflow-hidden rounded-3xl md:h-[23rem]"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleClose}
-              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </header>
-
-          {/* Main Content */}
-          <main className="flex-1 px-6 pb-12 max-w-4xl mx-auto w-full">
-            {/* Image or Gradient Header */}
-            {project.image ? (
-              <div
-                style={{ viewTransitionName: `project-image-${project.id}` }}
-                className="relative h-64 md:h-80 -mx-6 mb-8 overflow-hidden rounded-2xl"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 via-50% to-transparent" />
-              </div>
-            ) : (
-              <div
-                style={{ viewTransitionName: `project-dot-${project.id}` }}
-                className={`w-4 h-4 bg-linear-to-br ${project.color} rounded-full mb-6 shadow-lg`}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full w-full object-cover"
               />
-            )}
+              <div
+                className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-[0.22] mix-blend-screen`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/42 via-48% to-transparent" />
+            </div>
+          ) : (
+            <div
+              style={{ viewTransitionName: `project-dot-${project.id}` }}
+              className={`mb-5 h-4 w-4 rounded-full bg-gradient-to-br ${project.color} shadow-[0_0_22px_rgba(255,255,255,0.34)]`}
+            />
+          )}
 
-            {/* Title & Description */}
-            <div className="mb-8">
-              <h1
-                style={{ viewTransitionName: `project-title-${project.id}` }}
-                className="text-4xl md:text-6xl font-black text-white mb-4"
+          <div className="mb-7">
+            <h1
+              style={{ viewTransitionName: `project-title-${project.id}` }}
+              className="text-4xl font-extrabold tracking-tight text-white md:text-6xl"
+            >
+              {project.title}
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/78 md:text-xl">
+              {project.fullDescription || project.description}
+            </p>
+          </div>
+
+          <div className="mb-10 flex flex-wrap gap-2.5">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="glass-chip rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide text-white/92"
               >
-                {project.title}
-              </h1>
-              <p className="text-xl text-white/70">
-                {project.fullDescription || project.description}
-              </p>
-            </div>
+                {tag}
+              </span>
+            ))}
+          </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-3 mb-12">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 text-sm font-medium bg-white/10 text-white rounded-full border border-white/20 backdrop-blur-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-4">
-              {project.demoUrl && (
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl transition-all duration-300 backdrop-blur-sm border border-white/20"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  Live Demo
-                </a>
-              )}
-              {project.codeUrl && (
-                <a
-                  href={project.codeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center gap-2 px-6 py-3 bg-linear-to-r ${project.color} text-white font-medium rounded-xl transition-all duration-300 shadow-lg`}
-                >
-                  <Code2 className="w-5 h-5" />
-                  View Code
-                </a>
-              )}
-              {!project.demoUrl && !project.codeUrl && (
-                <div className="text-white/50 italic">
-                  This is the site you're currently viewing!
-                </div>
-              )}
-            </div>
-          </main>
-        </div>
+          <div className="flex flex-wrap gap-3">
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-chip inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/20"
+              >
+                <ExternalLink className="h-[18px] w-[18px]" />
+                Live Demo
+              </a>
+            )}
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 rounded-xl bg-gradient-to-r ${project.color} px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(0,0,0,0.28)] transition-transform duration-300 hover:translate-y-[-2px]`}
+              >
+                <Code2 className="h-[18px] w-[18px]" />
+                View Code
+              </a>
+            )}
+            {!project.demoUrl && !project.codeUrl && (
+              <div className="glass-chip rounded-xl px-4 py-3 text-sm text-white/70">
+                This is the site you're currently viewing.
+              </div>
+            )}
+          </div>
+        </main>
       </div>
     </div>
   );

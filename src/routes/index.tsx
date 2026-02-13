@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { getSizeClasses, projects } from "../data/projects";
 
@@ -15,17 +15,14 @@ function App() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  // Check at render time (not in useEffect!) for View Transition snapshot
   const isNavigatingBackRef = useRef(
     typeof window !== "undefined" &&
       sessionStorage.getItem("isNavigatingBack") === "true",
   );
 
   const handleCardClick = (projectId: string) => {
-    // Use View Transitions API if available
     if (document.startViewTransition) {
       document.startViewTransition(async () => {
-        // navigate() returns a promise, so View Transition waits for render
         await navigate({ to: "/project/$projectId", params: { projectId } });
       });
     } else {
@@ -35,28 +32,26 @@ function App() {
 
   useEffect(() => {
     if (isNavigatingBackRef.current) {
-      // Clean up flag - elements are already visible for View Transition
       sessionStorage.removeItem("isNavigatingBack");
       return;
     }
 
-    // First visit: hide elements immediately, then animate
-    gsap.set(".bento-card", { y: 60, opacity: 0 });
-    gsap.set(".projects-header", { y: -30, opacity: 0 });
+    gsap.set(".bento-card", { y: 56, opacity: 0, scale: 0.98 });
+    gsap.set(".projects-header", { y: -28, opacity: 0 });
 
-    // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       gsap.to(".bento-card", {
-        duration: 0.8,
+        duration: 0.82,
         y: 0,
         opacity: 1,
-        stagger: 0.1,
+        scale: 1,
+        stagger: 0.08,
         ease: "power3.out",
         clearProps: "transform,opacity",
       });
 
       gsap.to(".projects-header", {
-        duration: 1,
+        duration: 0.92,
         y: 0,
         opacity: 1,
         ease: "power3.out",
@@ -68,29 +63,38 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Projects Section - Full Screen */}
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <div className="pointer-events-none absolute -left-20 top-16 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-fuchsia-400/15 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-sky-400/12 blur-3xl" />
+
       <section
         ref={projectsRef}
-        className="projects-section min-h-screen py-12 px-6 max-w-7xl mx-auto flex flex-col"
+        className="projects-section relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 pb-14 pt-12 md:px-8"
       >
-        {/* Header */}
-        <div className="projects-header text-center mb-12">
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight">
-            Featured{" "}
-            <span className="bg-linear-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              Projects
+        <div className="projects-header glass-panel mb-8 rounded-[2rem] px-6 py-8 md:px-10 md:py-10">
+          <div className="glass-chip mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase">
+            <Sparkles className="h-3.5 w-3.5" />
+            Selected Work
+          </div>
+
+          <h1 className="text-balance text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
+            Bento Portfolio,
+            <br />
+            <span className="bg-gradient-to-r from-cyan-200 via-white to-fuchsia-200 bg-clip-text text-transparent">
+              Glass Reimagined
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-            Crafting beautiful digital experiences with modern web technologies
+
+          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-white/72 md:text-lg">
+            A curated selection of builds focused on delightful interaction,
+            resilient architecture, and pixel-precise product execution.
           </p>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[320px] gap-4 flex-1">
+        <div className="grid grid-cols-1 auto-rows-[280px] gap-4 md:grid-cols-4 md:auto-rows-[320px]">
           {projects.map((project) => (
-            <div
+            <article
               key={project.id}
               onClick={() => handleCardClick(project.id)}
               onKeyDown={(e) => {
@@ -101,91 +105,77 @@ function App() {
               role="button"
               tabIndex={0}
               style={{ viewTransitionName: `project-card-${project.id}` }}
-              className={`bento-card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:translate-y-[-5px] hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/20 overflow-hidden cursor-pointer ${getSizeClasses(project.size)}`}
+              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 ${getSizeClasses(project.size)}`}
             >
-              {/* Gradient overlay */}
               <div
-                className={`absolute inset-0 bg-linear-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${project.color} opacity-[0.18] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
               />
 
-              <div className="relative h-full flex flex-col">
-                {/* Image or Gradient Dot */}
-                {project.image ? (
-                  <div
-                    style={{
-                      viewTransitionName: `project-image-${project.id}`,
-                    }}
-                    className="relative h-[60%] -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-3xl"
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 via-50% to-transparent" />
-                  </div>
-                ) : (
-                  <div
-                    style={{ viewTransitionName: `project-dot-${project.id}` }}
-                    className={`w-3 h-3 bg-linear-to-br ${project.color} rounded-full mb-4 shadow-lg shadow-black/20`}
+              {project.image ? (
+                <div
+                  style={{ viewTransitionName: `project-image-${project.id}` }}
+                  className="relative -mx-5 -mt-5 mb-4 h-[58%] overflow-hidden rounded-t-[1.8rem]"
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/48 via-45% to-transparent" />
+                </div>
+              ) : (
+                <div
+                  style={{ viewTransitionName: `project-dot-${project.id}` }}
+                  className={`mb-4 h-3.5 w-3.5 rounded-full bg-gradient-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
+                />
+              )}
+
+              <div className="relative flex h-full flex-col">
+                <h3
+                  style={{ viewTransitionName: `project-title-${project.id}` }}
+                  className="relative mb-3 text-xl font-bold md:text-2xl"
+                >
+                  <span className="transition-opacity duration-300 group-hover:opacity-0">
+                    {project.title}
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    {project.title}
+                  </span>
+                </h3>
+
+                {!project.image && (
+                  <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
+                    {project.description}
+                  </p>
                 )}
 
-                {/* Content */}
-                <div className="flex-1 flex flex-col group-hover:translate-x-[5px] transition-all duration-500">
-                  <h3
-                    style={{
-                      viewTransitionName: `project-title-${project.id}`,
-                    }}
-                    className="relative text-xl md:text-2xl font-bold mb-3"
-                  >
-                    {/* 기본 흰색 텍스트 - hover시 fade out */}
-                    <span className="text-white transition-opacity duration-300 group-hover:opacity-0">
-                      {project.title}
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="glass-chip rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white/92"
+                    >
+                      {tag}
                     </span>
-                    {/* 그라데이션 텍스트 - hover시 fade in */}
-                    <span className="absolute inset-0 bg-linear-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      {project.title}
-                    </span>
-                  </h3>
+                  ))}
+                </div>
 
-                  {!project.image && (
-                    <p className="text-white/70 text-sm md:text-base mb-4 leading-relaxed flex-1">
-                      {project.description}
-                    </p>
-                  )}
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 text-xs font-medium bg-white/10 text-white/90 rounded-full border border-white/20 backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* View Details */}
-                  <div className="flex items-center gap-2 mt-auto text-white/50 group-hover:text-white transition-colors duration-300">
-                    <span className="text-sm font-medium">View Details</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
+                <div className="mt-auto flex items-center gap-2 text-white/62 transition-colors duration-300 group-hover:text-white">
+                  <span className="text-xs font-semibold tracking-[0.14em] uppercase">
+                    View Details
+                  </span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-white/50 text-sm">
-            Built with <span className="text-red-400">♥</span> using TanStack
-            Start, TailwindCSS, and GSAP
-          </p>
+      <footer className="relative z-10 border-t border-white/10 px-6 py-7">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-2 text-xs text-white/55 md:flex-row md:text-sm">
+          <p>Crafted with TanStack Start, Tailwind CSS, and GSAP.</p>
+          <p className="tracking-[0.12em] uppercase">Portfolio Experience</p>
         </div>
       </footer>
     </div>
