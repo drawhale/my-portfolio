@@ -25,7 +25,7 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-slate-950 px-6 py-20">
+      <div className="min-h-screen px-6 py-20">
         <div className="glass-panel mx-auto max-w-xl rounded-3xl p-8 text-center">
           <h1 className="mb-3 text-4xl font-bold text-white">
             Project Not Found
@@ -42,9 +42,9 @@ function ProjectDetail() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950">
-      <div className="pointer-events-none absolute -right-24 top-12 h-96 w-96 rounded-full bg-fuchsia-400/18 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-cyan-400/16 blur-3xl" />
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="pointer-events-none absolute -right-24 top-12 h-96 w-96 rounded-full bg-rose-300/16 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-teal-300/18 blur-3xl" />
 
       <div
         style={{ viewTransitionName: `project-card-${project.id}` }}

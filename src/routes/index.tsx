@@ -62,10 +62,10 @@ function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-      <div className="pointer-events-none absolute -left-20 top-16 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-fuchsia-400/15 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-sky-400/12 blur-3xl" />
+    <div className="relative min-h-screen overflow-hidden text-white">
+      <div className="pointer-events-none absolute -left-20 top-16 h-80 w-80 rounded-full bg-teal-300/20 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-rose-300/16 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-indigo-300/14 blur-3xl" />
 
       <section
         ref={projectsRef}
