@@ -32,18 +32,13 @@ function App() {
 
   useEffect(() => {
     if (isNavigatingBackRef.current) {
-      gsap.set(".hero-name", { opacity: 0 });
-      gsap.set(".hero-expand, .hero-sub", {
-        y: 0,
+      gsap.set(".hero-container, .hero-sub", {
         opacity: 1,
-        scale: 1,
         filter: "none",
+        y: 0,
       });
-      gsap.set(".hero-expand-d, .hero-expand-w", { x: 0 });
-      gsap.set(".hero-expand-e, .hero-expand-eb", {
-        width: "auto",
-        opacity: 1,
-      });
+      gsap.set(".hero-evelop, .hero-eb", { width: 0, opacity: 0 });
+      gsap.set(".hero-ong, .hero-ook", { width: "2.8ch", opacity: 1 });
       sessionStorage.removeItem("isNavigatingBack");
       return;
     }
@@ -51,26 +46,25 @@ function App() {
     gsap.set(".bento-card", { y: 56, opacity: 0, scale: 0.98 });
     gsap.set(".projects-header", { y: -28, opacity: 0 });
 
-    gsap.set(".hero-name, .hero-sub", {
+    gsap.set(".hero-container, .hero-sub", {
       y: 12,
       opacity: 0,
       filter: "blur(8px)",
     });
-    gsap.set(".hero-d, .hero-w, .hero-expand-d, .hero-expand-w", {
+    gsap.set(".hero-d, .hero-w", {
       textShadow: "0 0 0 rgba(0,0,0,0)",
       scale: 1,
     });
-    gsap.set(".hero-expand", { y: 6, opacity: 0 });
-    gsap.set(".hero-expand-d", { x: 22 });
-    gsap.set(".hero-expand-w", { x: -22 });
-    gsap.set(".hero-expand-e, .hero-expand-eb", { width: 0, opacity: 0 });
+
+    gsap.set(".hero-evelop, .hero-eb", { width: "auto", opacity: 1 });
+    gsap.set(".hero-ong, .hero-ook", { width: 0, opacity: 0 });
 
     const timer = setTimeout(() => {
       const introTimeline = gsap.timeline();
 
       introTimeline
-        .to(".hero-name", {
-          duration: 0.55,
+        .to(".hero-container", {
+          duration: 0.5,
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
@@ -99,104 +93,56 @@ function App() {
           0.84,
         )
         .to(
-          ".hero-ong, .hero-ook",
+          ".hero-evelop, .hero-eb",
           {
-            duration: 0.36,
-            y: -10,
+            duration: 0.45,
+            width: 0,
             opacity: 0,
             filter: "blur(5px)",
             ease: "power2.inOut",
           },
-          0.7,
+          1.0,
+        )
+        .to(
+          ".hero-ong",
+          {
+            duration: 0.58,
+            width: "2.8ch",
+            opacity: 1,
+            ease: "power3.out",
+          },
+          1.5,
+        )
+        .to(
+          ".hero-ook",
+          {
+            duration: 0.45,
+            width: "2.8ch",
+            opacity: 1,
+            ease: "power3.out",
+          },
+          1.55,
         )
         .to(
           ".hero-d",
           {
-            duration: 0.4,
-            x: 24,
-            ease: "power2.inOut",
+            duration: 0.36,
+            x: 6,
+            textShadow:
+              "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
+            ease: "power2.out",
           },
-          0.74,
+          1.8,
         )
         .to(
           ".hero-w",
-          {
-            duration: 0.4,
-            x: -24,
-            ease: "power2.inOut",
-          },
-          0.74,
-        )
-        .to(
-          ".hero-name",
-          {
-            duration: 0.26,
-            opacity: 0,
-            ease: "power1.out",
-          },
-          1.08,
-        )
-        .to(
-          ".hero-expand",
-          {
-            duration: 0.24,
-            y: 0,
-            opacity: 1,
-            ease: "power2.out",
-          },
-          1.08,
-        )
-        .to(
-          ".hero-expand-d",
-          {
-            duration: 0.5,
-            x: 0,
-            textShadow:
-              "0 0 7px rgba(186,230,253,0.3), 0 0 16px rgba(167,139,250,0.16)",
-            ease: "power3.out",
-          },
-          1.12,
-        )
-        .to(
-          ".hero-expand-w",
-          {
-            duration: 0.5,
-            x: 0,
-            textShadow:
-              "0 0 7px rgba(244,114,182,0.24), 0 0 16px rgba(232,121,249,0.16)",
-            ease: "power3.out",
-          },
-          1.12,
-        )
-        .to(
-          ".hero-expand-d, .hero-expand-w",
           {
             duration: 0.36,
             textShadow:
               "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
             ease: "power2.out",
           },
-          1.45,
-        )
-        .to(
-          ".hero-expand-e",
-          {
-            duration: 0.58,
-            width: "4.6ch",
-            opacity: 1,
-            ease: "power3.out",
-          },
-          1.14,
-        )
-        .to(
-          ".hero-expand-eb",
-          {
-            duration: 0.45,
-            width: "1.95ch",
-            opacity: 1,
-            ease: "power3.out",
-          },
-          1.24,
+          1.8,
         )
         .to(
           ".hero-sub",
@@ -207,7 +153,7 @@ function App() {
             filter: "blur(0px)",
             ease: "power2.out",
           },
-          1.34,
+          1.85,
         );
 
       gsap.to(".bento-card", {
@@ -216,7 +162,7 @@ function App() {
         opacity: 1,
         scale: 1,
         stagger: 0.08,
-        delay: 0.95,
+        delay: 2.15,
         ease: "power3.out",
         clearProps: "transform,opacity",
       });
@@ -225,7 +171,7 @@ function App() {
         duration: 0.92,
         y: 0,
         opacity: 1,
-        delay: 0.86,
+        delay: 2.05,
         ease: "power3.out",
         clearProps: "transform,opacity",
       });
@@ -246,56 +192,52 @@ function App() {
         ref={projectsRef}
         className="projects-section relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 pb-14 pt-12 md:px-8"
       >
-        <div className="mb-7 md:mb-9">
-          <div className="relative h-[5.2rem] md:h-[7.4rem]">
-            <div className="hero-name absolute inset-0 flex items-end text-[2.25rem] leading-none font-extrabold tracking-tight text-white opacity-0 md:text-[4.1rem]">
-              <span className="hero-d bg-linear-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent">
-                D
-              </span>
-              <span className="hero-ong">ong</span>
-              <span className="hero-w bg-linear-to-r from-cyan-100 to-fuchsia-100 bg-clip-text text-transparent">
-                W
-              </span>
-              <span className="hero-ook">ook</span>
-            </div>
-
-            <div className="hero-expand absolute inset-0 flex items-end gap-0 text-[2rem] leading-none font-extrabold tracking-tight opacity-0 md:text-[4rem]">
+        <div className="mb-7 flex flex-col items-center md:mb-9">
+          <div className="relative w-full max-w-2xl h-[5.2rem] md:h-[7.4rem] overflow-visible">
+            <div className="hero-container absolute inset-0 flex justify-center items-end gap-0 text-[2.25rem] leading-none font-extrabold tracking-tight text-white opacity-0 md:text-[4.1rem]">
               <span className="inline-flex items-end gap-0">
-                <span className="hero-expand-d bg-linear-to-r from-cyan-100 to-teal-200 bg-clip-text text-transparent">
+                <span className="hero-d bg-linear-to-r from-cyan-100 to-teal-200 bg-clip-text text-transparent pb-2 md:pb-3">
                   D
                 </span>
+                <span className="hero-evelop inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-cyan-100 via-white to-blue-200 bg-clip-text text-transparent pb-2 md:pb-3">
+                  evelop&nbsp;
+                </span>
                 <span
-                  className="hero-expand-e inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-cyan-100 via-white to-blue-200 bg-clip-text text-transparent"
-                  style={{ width: 0, opacity: 0 }}
+                  className="hero-ong inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-cyan-100 via-white to-blue-200 bg-clip-text text-transparent pb-2 md:pb-3"
+                  style={{ direction: "rtl", width: 0, opacity: 0 }}
                 >
-                  evelop
+                  <span className="inline-block" style={{ direction: "ltr" }}>
+                    ong
+                  </span>
                 </span>
               </span>
 
-              <span className="ml-1.5 inline-flex items-end gap-0 md:ml-2.5">
-                <span className="hero-expand-w bg-linear-to-r from-rose-100 to-fuchsia-200 bg-clip-text text-transparent">
+              <span className="ml-1.5 inline-flex items-end gap-0 md:ml-3">
+                <span className="hero-w bg-linear-to-r from-rose-100 to-fuchsia-200 bg-clip-text text-transparent pb-2 md:pb-3">
                   W
                 </span>
+                <span className="hero-eb inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-rose-100 via-white to-fuchsia-200 bg-clip-text text-transparent pb-2 md:pb-3">
+                  eb
+                </span>
                 <span
-                  className="hero-expand-eb inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-rose-100 via-white to-fuchsia-200 bg-clip-text text-transparent"
+                  className="hero-ook inline-block overflow-hidden whitespace-nowrap bg-linear-to-r from-rose-100 via-white to-fuchsia-200 bg-clip-text text-transparent pb-2 md:pb-3"
                   style={{ width: 0, opacity: 0 }}
                 >
-                  eb
+                  ook
                 </span>
               </span>
             </div>
           </div>
 
-          <p className="hero-sub mt-3 text-sm text-white/66 opacity-0 md:text-base">
-            Dongwook identity sharpens into{" "}
-            <span className="text-white/88">Develop Web</span>
+          <p className="hero-sub mt-3 text-center text-sm text-white/66 opacity-0 md:text-base">
+            Creativity as a tool, thriving on challenges
           </p>
         </div>
 
         <header className="projects-header relative mb-10 border-b border-white/15 pb-8 md:pb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-sm font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" />
-            Selected Work
+            Featured Projects
           </div>
 
           <h1 className="text-balance text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
