@@ -46,10 +46,7 @@ function ProjectDetail() {
       <div className="pointer-events-none absolute -right-24 top-12 h-96 w-96 rounded-full bg-rose-300/16 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-teal-300/18 blur-3xl" />
 
-      <div
-        style={{ viewTransitionName: `project-card-${project.id}` }}
-        className="relative z-10 mx-auto min-h-screen w-full max-w-5xl px-5 pb-12 pt-8 md:px-8"
-      >
+      <div className="relative z-10 mx-auto min-h-screen w-full max-w-5xl px-5 pb-12 pt-8 md:px-8">
         <header className="flex justify-end">
           <button
             type="button"
@@ -61,7 +58,10 @@ function ProjectDetail() {
           </button>
         </header>
 
-        <main className="glass-panel rounded-4xl p-5 md:p-8">
+        <main
+          style={{ viewTransitionName: `project-card-${project.id}` }}
+          className="glass-panel rounded-4xl p-5 md:p-8"
+        >
           <div className="glass-chip mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/92 uppercase">
             <Sparkles className="h-3.5 w-3.5" />
             Project Story
