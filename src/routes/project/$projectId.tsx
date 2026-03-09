@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Code2, ExternalLink, Sparkles, X } from "lucide-react";
+import { Code2, ExternalLink, Sparkles, X } from "lucide-react";
 import { getProjectById } from "../../data/projects";
 
 export const Route = createFileRoute("/project/$projectId")({
@@ -50,21 +50,12 @@ function ProjectDetail() {
         style={{ viewTransitionName: `project-card-${project.id}` }}
         className="relative z-10 mx-auto min-h-screen w-full max-w-5xl px-5 pb-12 pt-8 md:px-8"
       >
-        <header className="glass-panel mb-6 flex items-center justify-between rounded-3xl p-4 md:p-5">
+        <header className="flex justify-end">
           <button
             type="button"
-            onClick={handleClose}
-            className="glass-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
-          >
-            <ArrowLeft className="h-[18px] w-[18px]" />
-            Back
-          </button>
-
-          <button
-            type="button"
-            onClick={handleClose}
-            className="glass-chip rounded-full p-2.5 text-white transition-all duration-300 hover:bg-white/20"
+            className="glass-panel mb-3 flex items-center justify-between rounded-full p-3 md:p-4 cursor-pointer"
             aria-label="Close"
+            onClick={handleClose}
           >
             <X className="h-5 w-5" />
           </button>
