@@ -6,16 +6,18 @@ body {
   font-family: "Plus Jakarta Sans", "Avenir Next", "SF Pro Display", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:
+  /* background:
     radial-gradient(circle at 8% 12%, #44f8d44d 0, transparent 42%),
     radial-gradient(circle at 84% 10%, #ff8fb44a 0, transparent 48%),
     radial-gradient(circle at 24% 84%, #78a9ff45 0, transparent 44%),
     radial-gradient(circle at 92% 74%, #f7d56b2b 0, transparent 36%),
-    linear-gradient(135deg, #040816 0%, #091229 44%, #0a1320 100%);
+    linear-gradient(135deg, #040816 0%, #091229 44%, #0a1320 100%); */
+  background: #222222;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .glass-panel {
@@ -41,7 +43,12 @@ code {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(120deg, transparent 30%, #ffffff2f 50%, transparent 70%);
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    #ffffff16 50%,
+    transparent 70%
+  );
   transform: translateX(-120%);
   transition: transform 0.7s ease;
 }

@@ -235,22 +235,17 @@ function App() {
         </div>
 
         <header className="projects-header relative mb-10 border-b border-white/15 pb-8 md:pb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-sm font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-xs md:text-sm font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" />
             Featured Projects
           </div>
 
-          <h1 className="text-balance text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
-            Bento Portfolio,
-            <br />
-            <span className="bg-linear-to-r from-cyan-200 via-white to-fuchsia-200 bg-clip-text text-transparent">
-              Glass Reimagined
-            </span>
-          </h1>
-
-          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-white/72 md:text-lg">
-            A curated selection of builds focused on delightful interaction,
-            resilient architecture, and pixel-precise product execution.
+          <p className="mt-5 max-w-3xl text-xs leading-relaxed text-white/72 md:text-lg italic">
+            복잡한 데이터와 요구사항 속에서도 직관적인 UI와 최적화된 렌더링을
+            고민합니다. 견고한 디자인 시스템을 설계하고 얽혀있는 레거시 코드를
+            개선해 나가는 과정의 기술적 난제들을 성장의 동력으로 삼습니다.
+            개인의 기술적 성취를 넘어, 팀과 함께 호흡하며 더 나은 코드의 기준을
+            만들어가는 것을 즐깁니다.
           </p>
         </header>
 
@@ -261,10 +256,10 @@ function App() {
               key={project.id}
               onClick={() => handleCardClick(project.id)}
               style={{ viewTransitionName: `project-card-${project.id}` }}
-              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 ${getSizeClasses(project.size)}`}
+              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 cursor-pointer ${getSizeClasses(project.size)}`}
             >
               <div
-                className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.18] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
+                className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.06] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
               />
 
               {project.image ? (
