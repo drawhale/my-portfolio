@@ -1,8 +1,17 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+  createRootRoute,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import appCss from "../styles.css?url";
+
+// 페이지 새로고침/최초 로드 시 방문 기록 초기화 (SPA 재탐색 시에는 실행되지 않음)
+if (typeof window !== "undefined") {
+  sessionStorage.removeItem("indexVisited");
+}
 
 export const Route = createRootRoute({
   head: () => ({

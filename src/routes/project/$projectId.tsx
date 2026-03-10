@@ -1,4 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  useNavigate,
+} from "@tanstack/react-router";
 import { Code2, ExternalLink, Sparkles, X } from "lucide-react";
 import { getProjectById } from "../../data/projects";
 
@@ -12,15 +16,7 @@ function ProjectDetail() {
   const project = getProjectById(projectId);
 
   const handleClose = () => {
-    if (document.startViewTransition) {
-      document.startViewTransition(async () => {
-        sessionStorage.setItem("isNavigatingBack", "true");
-        await navigate({ to: "/" });
-      });
-    } else {
-      sessionStorage.setItem("isNavigatingBack", "true");
-      navigate({ to: "/" });
-    }
+    navigate({ to: "/" });
   };
 
   if (!project) {

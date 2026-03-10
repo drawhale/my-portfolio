@@ -2,7 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
+
 import { getSizeClasses, projects } from "../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,24 +15,18 @@ export const Route = createFileRoute("/")({
 function App() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  // StrictMode 이중 실행 방어: 컴포넌트 실제 언마운트 시 ref 초기화됨
+  const effectRanRef = useRef(false);
 
-  const isNavigatingBackRef = useRef(
-    typeof window !== "undefined" &&
-      sessionStorage.getItem("isNavigatingBack") === "true",
-  );
+  useLayoutEffect(() => {
+    // React StrictMode의 이중 실행을 막아 애니메이션이 두 번 실행되지 않게 함
+    if (effectRanRef.current) return;
+    effectRanRef.current = true;
 
-  const handleCardClick = (projectId: string) => {
-    if (document.startViewTransition) {
-      document.startViewTransition(async () => {
-        await navigate({ to: "/project/$projectId", params: { projectId } });
-      });
-    } else {
-      navigate({ to: "/project/$projectId", params: { projectId } });
-    }
-  };
+    // 첫 방문이 아니면 (SPA 재방문, 뒤로 가기 등) 즉시 최종 상태로 설정
+    const isFirstVisit = sessionStorage.getItem("indexVisited") !== "true";
 
-  useEffect(() => {
-    if (isNavigatingBackRef.current) {
+    if (!isFirstVisit) {
       gsap.set(".hero-container, .hero-sub", {
         opacity: 1,
         filter: "none",
@@ -39,9 +34,20 @@ function App() {
       });
       gsap.set(".hero-evelop, .hero-eb", { width: 0, opacity: 0 });
       gsap.set(".hero-ong, .hero-ook", { width: "2.8ch", opacity: 1 });
-      sessionStorage.removeItem("isNavigatingBack");
+      gsap.set(".hero-d", {
+        x: 6,
+        textShadow:
+          "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
+      });
+      gsap.set(".hero-w", {
+        textShadow:
+          "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
+      });
       return;
     }
+
+    // 첫 방문 기록
+    sessionStorage.setItem("indexVisited", "true");
 
     gsap.set(".bento-card", { y: 56, opacity: 0, scale: 0.98 });
     gsap.set(".projects-header", { y: -28, opacity: 0 });
@@ -254,7 +260,12 @@ function App() {
             <button
               type="button"
               key={project.id}
-              onClick={() => handleCardClick(project.id)}
+              onClick={() => {
+                navigate({
+                  to: "/project/$projectId",
+                  params: { projectId: project.id },
+                });
+              }}
               style={{ viewTransitionName: `project-card-${project.id}` }}
               className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 cursor-pointer ${getSizeClasses(project.size)}`}
             >
