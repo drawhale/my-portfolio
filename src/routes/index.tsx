@@ -322,7 +322,9 @@ function App() {
                 </h3>
 
                 {!project.image && (
-                  <p className="mb-1 text-[11px] text-white/40">{project.role}</p>
+                  <p className="mb-1 text-[11px] text-white/40">
+                    {project.role}
+                  </p>
                 )}
 
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
@@ -353,9 +355,8 @@ function App() {
       </section>
 
       <footer className="relative z-10 border-t border-white/10 px-6 py-7">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-2 text-xs text-white/55 md:flex-row md:text-sm">
-          <p>Crafted with TanStack Start, Tailwind CSS, and GSAP.</p>
-          <p className="tracking-[0.12em] uppercase">Portfolio Experience</p>
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-end gap-2 text-xs text-white/55 md:flex-row md:text-sm">
+          <p>&copy; 2026 DW. All rights reserved.</p>
         </div>
       </footer>
     </div>
