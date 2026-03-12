@@ -44,8 +44,9 @@ interface PortfolioProject {
    - `size`: 프로젝트 규모·중요도를 고려해 임의로 선정 (`large` > `wide`/`tall` > `medium`)
    - `summary`, `overview`, `keyContributions`, `takeaway`: 아래 **콘텐츠 작성 원칙** 참고
 3. 동일 `id`가 존재하면 덮어쓰고, 없으면 배열에 추가
-4. 파일을 저장한다
-5. 추가/수정된 항목의 핵심 내용을 요약해서 보여준다
+4. period 비교 후 시간순으로 내림차순 정렬
+5. 파일을 저장한다
+6. 추가/수정된 항목의 핵심 내용을 요약해서 보여준다
 
 ## 콘텐츠 작성 원칙
 
