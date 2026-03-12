@@ -1,5 +1,27 @@
 [
   {
+    "id": "websocket-module",
+    "title": "WebSocket 모듈",
+    "type": "work",
+    "period": {
+      "start": "2025.02",
+      "end": "2025.03"
+    },
+    "role": "프론트엔드 개발 · 모듈 설계",
+    "tags": ["TypeScript", "WebSocket", "React", "Next.js", "JavaScript"],
+    "summary": "외부 라이브러리의 한계를 넘어 실시간 연결을 안정적으로 보장하는 WebSocket 모듈을 직접 만든 프로젝트",
+    "overview": "실시간 동기화 기능에 사용하던 외부 WebSocket 라이브러리가 비동기 제어 이슈를 일으키며 연결 신뢰성을 담보할 수 없는 상황이 됐음. 라이브러리에 의존하는 대신 Native WebSocket API를 기반으로 모듈을 직접 설계해 이벤트 흐름과 연결 상태를 완전히 통제할 수 있는 구조를 만들었음.",
+    "keyContributions": [
+      "Native WebSocket API 기반 클라이언트 모듈을 자체 개발하고 이벤트 큐 시스템을 구현함으로써 외부 라이브러리의 비동기 제어 이슈를 근본적으로 해소했음",
+      "Health Check와 subscribe/unsubscribe 전용 대기열 아키텍처를 설계해 네트워크 불안정 상황에서도 연결이 자동 복구되는 구조를 만들었음",
+      "각 subscription의 개별 연결 상태를 독립적으로 관리하는 구조로 전환해 어떤 상황에서도 구독 연결이 보장되도록 신뢰성을 높였음"
+    ],
+    "takeaway": "라이브러리를 교체하거나 우회하는 대신 문제의 원인을 파고들어 직접 만드는 선택을 하는 성향이 잘 드러나는 프로젝트. 안정성이 중요한 실시간 기능일수록 제어권을 직접 갖는 것이 맞다는 판단과 그것을 실행에 옮기는 실력이 함께 담겨 있음.",
+    "color": "from-cyan-500 to-blue-600",
+    "size": "wide",
+    "links": {}
+  },
+  {
     "id": "consent-service",
     "title": "동의서 서비스",
     "type": "work",
@@ -43,7 +65,7 @@
     ],
     "takeaway": "기술 구현 너머 팀 간 협업 구조와 공통 언어를 설계하는 일에 자연스럽게 관심을 갖는 성향이 드러나는 프로젝트. 개발 결과물이 팀의 일하는 방식 자체를 바꿀 수 있다는 점을 잘 보여줌.",
     "color": "from-violet-500 to-fuchsia-500",
-    "size": "wide",
+    "size": "medium",
     "links": {}
   },
   {
