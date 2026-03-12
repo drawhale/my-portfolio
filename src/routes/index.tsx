@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 
 import { getSizeClasses, projects } from "../data/projects";
+import type { PortfolioProject } from "../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -261,7 +262,7 @@ function App() {
         </header>
 
         <div className="grid grid-cols-1 auto-rows-[280px] gap-4 md:grid-cols-4 md:auto-rows-[320px]">
-          {projects.map((project) => (
+          {projects.map((project: PortfolioProject) => (
             <button
               type="button"
               key={project.id}
@@ -281,29 +282,23 @@ function App() {
                 className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.06] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
               />
 
-              {project.image ? (
-                <div
-                  style={{ viewTransitionName: `project-image-${project.id}` }}
-                  className="relative -mx-5 -mt-5 mb-4 h-[58%] overflow-hidden rounded-t-[1.8rem]"
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/48 via-45% to-transparent" />
-                </div>
-              ) : (
+              <div className="mb-3 flex items-center justify-between">
                 <div
                   style={{ viewTransitionName: `project-dot-${project.id}` }}
-                  className={`mb-4 h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
+                  className={`h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
                 />
-              )}
+                <span className="text-[11px] font-medium text-white/40">
+                  {project.period.start}
+                  {project.period.end !== project.period.start
+                    ? ` ~ ${project.period.end}`
+                    : ""}
+                </span>
+              </div>
 
               <div className="relative flex h-full flex-col">
                 <h3
                   style={{ viewTransitionName: `project-title-${project.id}` }}
-                  className="relative mb-3 text-xl font-bold md:text-2xl"
+                  className="relative mb-2 text-xl font-bold md:text-2xl"
                 >
                   <span className="transition-opacity duration-300 group-hover:opacity-0">
                     {project.title}
@@ -313,11 +308,11 @@ function App() {
                   </span>
                 </h3>
 
-                {!project.image && (
-                  <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
-                    {project.description}
-                  </p>
-                )}
+                <p className="mb-1 text-[11px] text-white/40">{project.role}</p>
+
+                <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
+                  {project.overview}
+                </p>
 
                 <div className="mb-4 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (

@@ -18,6 +18,8 @@
     "takeaway": "불편함을 느낄 때 기존 솔루션을 수용하는 대신 문제를 직접 정의하고 처음부터 끝까지 실행하는 주도성, 그리고 기술적 구현에 그치지 않고 사용자 경험까지 고민하는 시각을 잘 보여주는 프로젝트.",
     "color": "from-rose-400 to-pink-500",
     "size": "medium",
-    "links": {}
+    "links": {
+      "demo": "http://invyt.dwlabs.workers.dev/drawing/dwyj"
+    }
   }
 ]
