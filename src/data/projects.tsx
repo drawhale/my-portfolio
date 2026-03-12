@@ -10,6 +10,7 @@ export interface PortfolioProject {
   }
   role: string
   tags: string[]
+  summary: string
   overview: string
   keyContributions: string[]
   takeaway: string

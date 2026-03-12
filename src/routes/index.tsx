@@ -276,7 +276,7 @@ function App() {
                 viewTransitionName: `project-card-${project.id}`,
                 opacity: 0,
               }}
-              className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 cursor-pointer ${getSizeClasses(project.size)}`}
+              className={`bento-card grid-shimmer glass-panel group relative flex flex-col overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 cursor-pointer ${getSizeClasses(project.size)}`}
             >
               <div
                 className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.06] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
@@ -287,15 +287,12 @@ function App() {
                   style={{ viewTransitionName: `project-dot-${project.id}` }}
                   className={`h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
                 />
-                <span className="text-[11px] font-medium text-white/40">
-                  {project.period.start}
-                  {project.period.end !== project.period.start
-                    ? ` ~ ${project.period.end}`
-                    : ""}
+                <span className="text-[11px] font-medium text-white/40 uppercase tracking-[0.12em]">
+                  {project.type === "side" ? "Side" : "Work"}
                 </span>
               </div>
 
-              <div className="relative flex h-full flex-col">
+              <div className="relative flex min-h-0 flex-1 flex-col">
                 <h3
                   style={{ viewTransitionName: `project-title-${project.id}` }}
                   className="relative mb-2 text-xl font-bold md:text-2xl"
@@ -311,11 +308,11 @@ function App() {
                 <p className="mb-1 text-[11px] text-white/40">{project.role}</p>
 
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
-                  {project.overview}
+                  {project.summary}
                 </p>
 
                 <div className="mb-4 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
+                  {project.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
                       className="glass-chip rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white/92"

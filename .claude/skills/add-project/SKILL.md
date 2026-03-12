@@ -20,6 +20,7 @@ interface PortfolioProject {
   };
   role: string; // 실제 담당 역할 범위를 구체적으로 (예: "기획 · 디자인 · 프론트엔드 개발")
   tags: string[]; // 기술 스택
+  summary: string; // 카드에 표시할 한 줄 소개 (1문장, 30자 내외)
   overview: string; // 프로젝트 배경·동기·목표 (2~3문장)
   keyContributions: string[]; // 주요 기여 항목 (각 항목은 행동 + 결과/의미를 담은 1문장)
   takeaway: string; // 이 프로젝트가 드러내는 나의 역량·특성·관점 (1~2문장)
@@ -41,7 +42,7 @@ interface PortfolioProject {
    - `role`: 실제 담당한 역할 전체를 나열 (단순 "개발"보다 구체적으로)
    - `color`: 프로젝트 분위기·도메인에 어울리는 Tailwind gradient 조합을 임의로 선정
    - `size`: 프로젝트 규모·중요도를 고려해 임의로 선정 (`large` > `wide`/`tall` > `medium`)
-   - `overview`, `keyContributions`, `takeaway`: 아래 **콘텐츠 작성 원칙** 참고
+   - `summary`, `overview`, `keyContributions`, `takeaway`: 아래 **콘텐츠 작성 원칙** 참고
 3. 동일 `id`가 존재하면 덮어쓰고, 없으면 배열에 추가
 4. 파일을 저장한다
 5. 추가/수정된 항목의 핵심 내용을 요약해서 보여준다
@@ -49,6 +50,12 @@ interface PortfolioProject {
 ## 콘텐츠 작성 원칙
 
 입력 텍스트를 그대로 옮기지 말고, 포트폴리오 독자(채용 담당자, 동료 개발자)에게 인상을 남길 수 있도록 **내용을 풍부하게 확장**한다. AI 가 작성한 것 같은 느낌을 최대한 줄이고 딱딱한 느낌을 없앤다. 문체는 "~했음", "~하였음" 형태로 통일한다 ("~했다", "~하였다" 사용 금지).
+
+### Summary
+
+- 카드에 노출되는 **한 줄 소개**로, 프로젝트의 핵심을 압축해서 담는다
+- 30자 내외, 1문장, 반드시 "~ 한 프로젝트"로 끝낸다
+- "왜 만들었나" 또는 "무엇을 해결했나"를 중심으로
 
 ### Overview
 
