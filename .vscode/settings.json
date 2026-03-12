@@ -1,4 +1,7 @@
 {
+  "editor.codeActionsOnSave": {
+    "organizeImports": "never"
+  },
   "files.watcherExclude": {
     "**/routeTree.gen.ts": true
   },
