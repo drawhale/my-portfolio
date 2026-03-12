@@ -285,7 +285,7 @@ function App() {
               {project.image && (
                 <div
                   style={{ viewTransitionName: `project-image-${project.id}` }}
-                  className="relative -mx-5 -mt-5 mb-4 h-[52%] shrink-0 overflow-hidden rounded-t-[1.8rem]"
+                  className={`relative -mx-5 -mt-5 mb-4 shrink-0 overflow-hidden rounded-t-[1.8rem] ${project.size === "medium" || project.size === "wide" ? "h-[38%]" : "h-[52%]"}`}
                 >
                   <img
                     src={project.image}
