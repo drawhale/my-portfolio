@@ -3,9 +3,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
-
-import { getSizeClasses, projects } from "../data/projects";
 import type { PortfolioProject } from "../data/projects";
+import { getSizeClasses, projects } from "../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -253,11 +252,12 @@ function App() {
           </div>
 
           <p className="mt-5 max-w-3xl text-xs leading-relaxed text-white/72 md:text-lg italic">
-            복잡한 데이터와 요구사항 속에서도 직관적인 UI와 최적화된 렌더링을
-            고민합니다. 견고한 디자인 시스템을 설계하고 얽혀있는 레거시 코드를
-            개선해 나가는 과정의 기술적 난제들을 성장의 동력으로 삼습니다.
-            개인의 기술적 성취를 넘어, 팀과 함께 호흡하며 더 나은 코드의 기준을
-            만들어가는 것을 즐깁니다.
+            단순히 구현하는 것에서 그치지 않고, 문제의 본질을 파악하고 더 나은
+            방향을 찾는 것을 즐깁니다.
+            <br />
+            도전을 망설이지 않고 창의적인 아이디어와 섬세한 고민을 담아 제품을
+            만들고, 그것을 사용하는 사람이 만족감을 느낄 때 가장 큰 보람을
+            느끼고 그런 개발자가 되는 것이 목표입니다.
           </p>
         </header>
 
