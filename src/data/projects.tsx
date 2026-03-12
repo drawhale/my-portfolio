@@ -14,6 +14,7 @@ export interface PortfolioProject {
   overview: string
   keyContributions: string[]
   takeaway: string
+  image?: string
   color: string
   size: 'large' | 'medium' | 'wide' | 'tall'
   links: {

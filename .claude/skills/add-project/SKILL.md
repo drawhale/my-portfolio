@@ -24,6 +24,7 @@ interface PortfolioProject {
   overview: string; // 프로젝트 배경·동기·목표 (2~3문장)
   keyContributions: string[]; // 주요 기여 항목 (각 항목은 행동 + 결과/의미를 담은 1문장)
   takeaway: string; // 이 프로젝트가 드러내는 나의 역량·특성·관점 (1~2문장)
+  image?: string; // 카드에 표시할 이미지 URL (선택)
   color: string; // Tailwind gradient (예: "from-purple-500 to-pink-500")
   size: "large" | "medium" | "wide" | "tall"; // 벤토 그리드 카드 크기
   links: {

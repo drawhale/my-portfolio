@@ -282,15 +282,31 @@ function App() {
                 className={`pointer-events-none absolute inset-0 bg-linear-to-br ${project.color} opacity-[0.06] mix-blend-screen transition-opacity duration-500 group-hover:opacity-30`}
               />
 
-              <div className="mb-3 flex items-center justify-between">
+              {project.image && (
                 <div
-                  style={{ viewTransitionName: `project-dot-${project.id}` }}
-                  className={`h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
-                />
-                <span className="text-[11px] font-medium text-white/40 uppercase tracking-[0.12em]">
-                  {project.type === "side" ? "Side" : ""}
-                </span>
-              </div>
+                  style={{ viewTransitionName: `project-image-${project.id}` }}
+                  className="relative -mx-5 -mt-5 mb-4 h-[52%] shrink-0 overflow-hidden rounded-t-[1.8rem]"
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 via-45% to-transparent" />
+                </div>
+              )}
+
+              {!project.image && (
+                <div className="mb-3 flex items-center justify-between">
+                  <div
+                    style={{ viewTransitionName: `project-dot-${project.id}` }}
+                    className={`h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
+                  />
+                  <span className="text-[11px] font-medium text-white/40 uppercase tracking-[0.12em]">
+                    {project.type === "side" ? "Side" : ""}
+                  </span>
+                </div>
+              )}
 
               <div className="relative flex min-h-0 flex-1 flex-col">
                 <h3
@@ -305,7 +321,9 @@ function App() {
                   </span>
                 </h3>
 
-                <p className="mb-1 text-[11px] text-white/40">{project.role}</p>
+                {!project.image && (
+                  <p className="mb-1 text-[11px] text-white/40">{project.role}</p>
+                )}
 
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
                   {project.summary}
