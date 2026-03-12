@@ -43,6 +43,8 @@ function App() {
         textShadow:
           "0 0 5px rgba(226,232,240,0.22), 0 0 11px rgba(186,230,253,0.12)",
       });
+      gsap.set(".projects-header", { opacity: 1, y: 0 });
+      gsap.set(".bento-card", { opacity: 1, y: 0, scale: 1 });
       return;
     }
 
@@ -240,7 +242,10 @@ function App() {
           </p>
         </div>
 
-        <header className="projects-header relative mb-10 border-b border-white/15 pb-8 md:pb-10">
+        <header
+          className="projects-header relative mb-10 border-b border-white/15 pb-8 md:pb-10"
+          style={{ opacity: 0 }}
+        >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/8 px-3 py-1.5 text-xs md:text-sm font-semibold tracking-[0.18em] text-white/90 uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" />
             Featured Projects
@@ -266,7 +271,10 @@ function App() {
                   params: { projectId: project.id },
                 });
               }}
-              style={{ viewTransitionName: `project-card-${project.id}` }}
+              style={{
+                viewTransitionName: `project-card-${project.id}`,
+                opacity: 0,
+              }}
               className={`bento-card grid-shimmer glass-panel group relative overflow-hidden rounded-[1.8rem] p-5 text-left transition-all duration-500 hover:-translate-y-1.5 hover:border-white/45 hover:shadow-[0_24px_40px_rgba(0,0,0,0.34)] focus-visible:outline-2 focus-visible:outline-cyan-300 cursor-pointer ${getSizeClasses(project.size)}`}
             >
               <div
