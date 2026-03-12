@@ -10,7 +10,8 @@
     "test": "vitest run",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "ship": "pnpm build && cp -r dist ../my-portfolio-page"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
