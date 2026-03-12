@@ -67,7 +67,6 @@ function ProjectDetail() {
             </div>
             {/* 컬러 도트 */}
             <div
-              style={{ viewTransitionName: `project-dot-${project.id}` }}
               className={`mb-5 h-4 w-4 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_22px_rgba(255,255,255,0.34)]`}
             />
           </div>

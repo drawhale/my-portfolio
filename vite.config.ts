@@ -30,11 +30,6 @@ const config = defineConfig({
       prerender: {
         enabled: true,
       },
-      pages: [
-        {
-          path: "/project/mobile-app",
-        },
-      ],
     }),
     viteReact(),
   ],
