@@ -9,6 +9,7 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 const enableTanStackDevtools = process.env.TANSTACK_DEVTOOLS === "true";
 
 const config = defineConfig({
+  base: "/my-portfolio-page/",
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

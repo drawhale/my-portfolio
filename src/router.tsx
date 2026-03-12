@@ -7,6 +7,7 @@ import { routeTree } from "./routeTree.gen";
 export const getRouter = () => {
   const router = createRouter({
     routeTree,
+    basepath: "/my-portfolio-page",
     context: {},
 
     scrollRestoration: true,
