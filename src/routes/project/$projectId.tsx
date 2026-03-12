@@ -151,7 +151,7 @@ function ProjectDetail() {
                 href={project.links.code}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 rounded-2xl bg-linear-to-r ${project.color} px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(0,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.4)]`}
+                className={`inline-flex items-center gap-2 rounded-2xl bg-linear-to-r from-black/70 to-black/40 px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(0,0,0,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.4)]`}
               >
                 <Code2 className="h-4.5 w-4.5" />
                 View Code
