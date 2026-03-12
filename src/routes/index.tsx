@@ -288,7 +288,7 @@ function App() {
                   className={`h-3.5 w-3.5 rounded-full bg-linear-to-br ${project.color} shadow-[0_0_20px_rgba(255,255,255,0.25)]`}
                 />
                 <span className="text-[11px] font-medium text-white/40 uppercase tracking-[0.12em]">
-                  {project.type === "side" ? "Side" : "Work"}
+                  {project.type === "side" ? "Side" : ""}
                 </span>
               </div>
 
