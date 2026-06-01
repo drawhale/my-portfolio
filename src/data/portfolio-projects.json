@@ -143,6 +143,31 @@
     "links": {}
   },
   {
+    "id": "plusvet-restructure",
+    "title": "PlusVet 구조 개편",
+    "type": "work",
+    "period": {
+      "start": "2024.01",
+      "end": "2024.03"
+    },
+    "role": "프론트엔드 개발 · 아키텍처 설계",
+    "tags": ["React", "TypeScript", "Electron", "GitHub Actions", "JavaScript"],
+    "summary": "사소한 UI 수정 하나에도 앱 전체를 다시 빌드·배포하고 사용자는 재설치해야 했던 Electron 구조를, 자주 바뀌는 UI와 거의 바뀌지 않는 네이티브 셸로 분리해 배포를 근본적으로 경량화한 프로젝트",
+    "problem": "기존 PlusVet은 UI와 네이티브 기능이 한 덩어리로 묶인 Electron 앱이라, 화면을 조금만 고쳐도 전체 앱을 다시 빌드·서명·배포하고 사용자는 매번 재설치해야 했음. 빌드는 Windows 기준 10분을 넘기고 앱 용량도 170MB를 웃돌아, 업데이트 한 번의 비용이 지나치게 컸음.",
+    "approach": "문제의 핵심을 '자주 바뀌는 것과 거의 안 바뀌는 것이 한 덩어리로 묶여 있다'는 데서 찾고, 둘을 분리하는 방향으로 접근했음. UI를 담당하는 renderer는 웹서버에 정적 호스팅해 웹처럼 배포하고, window 관리와 node 기능을 맡는 main만 로컬에 설치되는 가벼운 네이티브 셸로 남겨, 대부분의 업데이트는 무거운 앱 배포 없이 끝나도록 설계했음.",
+    "solution": [
+      "Electron 앱을 로컬에 설치되는 네이티브 셸(main)과 웹서버에 정적 호스팅되는 React 앱(renderer)으로 분리해, 자주 바뀌는 UI를 앱 재배포 없이 갱신할 수 있는 구조로 재설계",
+      "기존 단일 repository를 app·share·web 패키지로 나눈 monorepo로 전환해, 공통 코드를 공유하면서 배포 단위는 독립적으로 관리할 수 있게 만들었음",
+      "GitHub Actions로 app 배포와 web 배포 파이프라인을 분리해, 일상적인 변경은 web 배포(약 2~3분)만으로 끝나도록 하고 무거운 app 배포는 꼭 필요할 때만 수행하도록 정리",
+      "구조 분리로 빌드 시간을 Windows 10~11분 → 2~3분, Mac 7~8분 → 2~3분으로 단축하고, 앱 용량도 Windows 173MB → 71MB, Mac 134MB → 90MB로 경량화",
+      "web만 배포된 경우 app 재실행만으로 업데이트가 반영되도록 해 사용자 업데이트 경험을 단순화하고, Windows code signing 횟수도 16회 → 4회로 줄였음"
+    ],
+    "takeaway": "구조적 비효율을 표면 증상이 아닌 근본 원인(변하는 것과 변하지 않는 것의 결합)에서 짚어 아키텍처 수준으로 해결하고, 그 효과를 빌드 시간·용량·서명 횟수 같은 정량 지표로 증명하는 성향이 잘 드러나는 프로젝트. 개발 생산성과 사용자 경험을 동시에 끌어올리는 시야를 보여줌.",
+    "color": "from-orange-500 to-red-500",
+    "size": "wide",
+    "links": {}
+  },
+  {
     "id": "design-system",
     "title": "Design System",
     "type": "work",
