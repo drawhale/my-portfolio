@@ -1,6 +1,6 @@
 import portfolioProjects from './portfolio-projects.json'
 
-export interface PortfolioProject {
+interface PortfolioProjectBase {
   id: string
   title: string
   type: 'side' | 'work'
@@ -11,9 +11,6 @@ export interface PortfolioProject {
   role: string
   tags: string[]
   summary: string
-  overview: string
-  keyContributions: string[]
-  takeaway: string
   image?: string
   color: string
   size: 'large' | 'medium' | 'wide' | 'tall'
@@ -21,6 +18,27 @@ export interface PortfolioProject {
     demo?: string
     code?: string
   }
+}
+
+interface StorytellingProject extends PortfolioProjectBase {
+  problem: string
+  approach: string
+  solution: string
+  takeaway: string
+}
+
+interface LegacyProject extends PortfolioProjectBase {
+  overview: string
+  keyContributions: string[]
+  takeaway: string
+}
+
+export type PortfolioProject = StorytellingProject | LegacyProject
+
+export const hasStorytellingStructure = (
+  project: PortfolioProject,
+): project is StorytellingProject => {
+  return 'problem' in project
 }
 
 export const projects = portfolioProjects as PortfolioProject[]

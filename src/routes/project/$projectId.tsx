@@ -1,27 +1,25 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Code2, ExternalLink, Sparkles, X } from "lucide-react";
-import { getProjectById } from "../../data/projects";
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { Code2, ExternalLink, Sparkles, X } from 'lucide-react'
+import { getProjectById, hasStorytellingStructure } from '../../data/projects'
 
-export const Route = createFileRoute("/project/$projectId")({
+export const Route = createFileRoute('/project/$projectId')({
   component: ProjectDetail,
-});
+})
 
 function ProjectDetail() {
-  const { projectId } = Route.useParams();
-  const navigate = useNavigate();
-  const project = getProjectById(projectId);
+  const { projectId } = Route.useParams()
+  const navigate = useNavigate()
+  const project = getProjectById(projectId)
 
   const handleClose = () => {
-    navigate({ to: "/" });
-  };
+    navigate({ to: '/' })
+  }
 
   if (!project) {
     return (
       <div className="min-h-screen px-6 py-20">
         <div className="glass-panel mx-auto max-w-xl rounded-3xl p-8 text-center">
-          <h1 className="mb-3 text-4xl font-bold text-white">
-            Project Not Found
-          </h1>
+          <h1 className="mb-3 text-4xl font-bold text-white">Project Not Found</h1>
           <Link
             to="/"
             className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/18"
@@ -30,13 +28,13 @@ function ProjectDetail() {
           </Link>
         </div>
       </div>
-    );
+    )
   }
 
   const periodLabel =
     project.period.start === project.period.end
       ? project.period.start
-      : `${project.period.start} ~ ${project.period.end}`;
+      : `${project.period.start} ~ ${project.period.end}`
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -63,7 +61,7 @@ function ProjectDetail() {
           <div className="mb-4 flex justify-between items-center gap-2">
             <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/92 uppercase">
               <Sparkles className="h-3.5 w-3.5" />
-              {project.type === "side" ? "Side Project" : "Work"}
+              {project.type === 'side' ? 'Side Project' : 'Work'}
             </div>
             {/* 컬러 도트 */}
             <div
@@ -84,35 +82,55 @@ function ProjectDetail() {
             </p>
           </div>
 
-          {/* Overview */}
-          <p className="mb-10 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg">
-            {project.overview}
-          </p>
-
-          {/* Key Contributions */}
-          <div className="mb-8">
-            <h2 className="mb-4 text-xs font-semibold tracking-[0.18em] text-white/45 uppercase">
-              Key Contributions
-            </h2>
-            <ul className="space-y-3">
-              {project.keyContributions.map((item, i) => (
-                <li
-                  key={i}
-                  className="flex gap-3 text-sm leading-relaxed text-white/78 md:text-base"
-                >
-                  <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
-                  {item}
-                </li>
+          {hasStorytellingStructure(project) ? (
+            <div className="mb-8 space-y-7">
+              {[
+                ['Problem', project.problem],
+                ['Approach', project.approach],
+                ['Solution', project.solution],
+              ].map(([label, content]) => (
+                <section key={label}>
+                  <h2 className="mb-3 text-xs font-semibold tracking-[0.18em] text-white/45 uppercase">
+                    {label}
+                  </h2>
+                  <p className="max-w-3xl text-sm leading-relaxed text-white/78 md:text-base">
+                    {content}
+                  </p>
+                </section>
               ))}
-            </ul>
-          </div>
+            </div>
+          ) : (
+            <>
+              {/* Overview */}
+              <p className="mb-10 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg">
+                {project.overview}
+              </p>
+
+              {/* Key Contributions */}
+              <div className="mb-8">
+                <h2 className="mb-4 text-xs font-semibold tracking-[0.18em] text-white/45 uppercase">
+                  Key Contributions
+                </h2>
+                <ul className="space-y-3">
+                  {project.keyContributions.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-3 text-sm leading-relaxed text-white/78 md:text-base"
+                    >
+                      <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
 
           {/* Takeaway */}
           <div
             className="mb-10 glass-chip rounded-2xl px-5 py-4"
             style={{
-              background:
-                "linear-gradient(135deg, #00000066 0%, #00000066 100%)",
+              background: 'linear-gradient(135deg, #00000066 0%, #00000066 100%)',
             }}
           >
             <p className="text-sm leading-relaxed text-white/65 italic md:text-base">
@@ -160,5 +178,5 @@ function ProjectDetail() {
         </main>
       </div>
     </div>
-  );
+  )
 }
