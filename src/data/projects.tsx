@@ -23,7 +23,7 @@ interface PortfolioProjectBase {
 interface StorytellingProject extends PortfolioProjectBase {
   problem: string
   approach: string
-  solution: string
+  solution: string[]
   takeaway: string
 }
 
