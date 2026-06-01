@@ -8,11 +8,66 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { getProjectById, hasStorytellingStructure } from "../../data/projects";
+import {
+  getProjectById,
+  hasStorytellingStructure,
+  hasThemedStructure,
+} from "../../data/projects";
 
 export const Route = createFileRoute("/project/$projectId")({
   component: ProjectDetail,
 });
+
+function StageTimeline({
+  problem,
+  approach,
+  solution,
+}: {
+  problem: string;
+  approach: string;
+  solution: string | string[];
+}) {
+  const stages = [
+    { kr: "문제", Icon: AlertCircle, color: "text-amber-300", body: problem },
+    { kr: "접근", Icon: Lightbulb, color: "text-sky-300", body: approach },
+    { kr: "해결", Icon: CheckCircle2, color: "text-rose-300", body: solution },
+  ];
+
+  return (
+    <div className="relative">
+      {stages.map(({ kr, Icon, color, body }, idx) => (
+        <div key={kr} className="relative flex gap-4 pb-2 last:pb-0">
+          {idx < stages.length - 1 && (
+            <span className="absolute top-9 bottom-1 left-4 w-px -translate-x-1/2 bg-white/12" />
+          )}
+          <div className="glass-chip relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+            <Icon className={`h-4 w-4 ${color}`} />
+          </div>
+          <div className="flex-1 pt-1">
+            <p className={`mb-2.5 text-base ${color}`}>{kr}</p>
+            {Array.isArray(body) ? (
+              <ul className="space-y-2.5">
+                {body.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex gap-3 text-sm leading-relaxed text-white/78 md:text-base"
+                  >
+                    <span className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="max-w-3xl text-sm leading-relaxed text-white/78 md:text-base">
+                {body}
+              </p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function ProjectDetail() {
   const { projectId } = Route.useParams();
@@ -87,65 +142,37 @@ function ProjectDetail() {
             >
               {project.title}
             </h1>
-            <p className="mt-3 text-base leading-relaxed text-white/70 md:text-lg">
-              {project.summary}
-            </p>
             <p className="mt-2 text-sm text-white/45">
               {project.role} | {periodLabel}
             </p>
           </div>
 
-          {hasStorytellingStructure(project) ? (
-            <div className="relative mb-8">
-              {[
-                {
-                  kr: "문제",
-                  Icon: AlertCircle,
-                  color: "text-amber-300",
-                  body: project.problem,
-                },
-                {
-                  kr: "접근",
-                  Icon: Lightbulb,
-                  color: "text-sky-300",
-                  body: project.approach,
-                },
-                {
-                  kr: "해결",
-                  Icon: CheckCircle2,
-                  color: "text-rose-300",
-                  body: project.solution,
-                },
-              ].map(({ kr, Icon, color, body }, idx, arr) => (
-                <div key={kr} className="relative flex gap-4 pb-8 last:pb-0">
-                  {idx < arr.length - 1 && (
-                    <span className="absolute top-9 bottom-1 left-4 w-px -translate-x-1/2 bg-white/12" />
-                  )}
-                  <div className="glass-chip relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
-                    <Icon className={`h-4 w-4 ${color}`} />
-                  </div>
-                  <div className="flex-1 pt-1">
-                    <h2 className={`mb-2.5 text-base ${color}`}>{kr}</h2>
-                    {Array.isArray(body) ? (
-                      <ul className="space-y-2.5">
-                        {body.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex gap-3 text-sm leading-relaxed text-white/78 md:text-base"
-                          >
-                            <span className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="max-w-3xl text-sm leading-relaxed text-white/78 md:text-base">
-                        {body}
-                      </p>
-                    )}
-                  </div>
+          <p className="mb-8 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg">
+            {project.summary}
+          </p>
+
+          {hasThemedStructure(project) ? (
+            <div className="mb-8 space-y-10">
+              {project.themes.map((theme) => (
+                <div key={theme.title}>
+                  <h3 className="mb-5 text-lg font-bold text-white md:text-xl">
+                    {theme.title}
+                  </h3>
+                  <StageTimeline
+                    problem={theme.problem}
+                    approach={theme.approach}
+                    solution={theme.solution}
+                  />
                 </div>
               ))}
+            </div>
+          ) : hasStorytellingStructure(project) ? (
+            <div className="mb-8">
+              <StageTimeline
+                problem={project.problem}
+                approach={project.approach}
+                solution={project.solution}
+              />
             </div>
           ) : (
             <>

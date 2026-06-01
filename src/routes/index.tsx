@@ -325,7 +325,7 @@ function App() {
                   </p>
                 )}
 
-                <p className="mb-4 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
+                <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-white/72 md:text-[0.95rem]">
                   {project.summary}
                 </p>
 

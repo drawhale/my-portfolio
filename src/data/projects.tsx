@@ -27,18 +27,39 @@ interface StorytellingProject extends PortfolioProjectBase {
   takeaway: string
 }
 
+interface ThemeArc {
+  title: string
+  problem: string
+  approach: string
+  solution: string
+}
+
+interface ThemedProject extends PortfolioProjectBase {
+  themes: ThemeArc[]
+  takeaway: string
+}
+
 interface LegacyProject extends PortfolioProjectBase {
   overview: string
   keyContributions: string[]
   takeaway: string
 }
 
-export type PortfolioProject = StorytellingProject | LegacyProject
+export type PortfolioProject =
+  | StorytellingProject
+  | ThemedProject
+  | LegacyProject
 
 export const hasStorytellingStructure = (
   project: PortfolioProject,
 ): project is StorytellingProject => {
   return 'problem' in project
+}
+
+export const hasThemedStructure = (
+  project: PortfolioProject,
+): project is ThemedProject => {
+  return 'themes' in project
 }
 
 export const projects = portfolioProjects as PortfolioProject[]
